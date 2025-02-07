@@ -1,15 +1,17 @@
 
 def group_anagrams(words):
-    anagrams = {}
-    for i in words:
-        values = ''.join(sorted(i))
-    
-        if values not in anagrams:
-            anagrams[values] = []
+    groups= {}
+    for word in words:
+        key = ''.join(sorted(word))
+        if key not in groups:
+            groups[key] = [word]
+        else:
+            groups[key].append(word)
 
-        anagrams[values].append(i)
-    return list(anagrams.values())
+    return list(groups.values())
+
+    
         
 words = ['tea', 'eat', 'tan', 'nat','bat']
-print(group_anagrams(words))
+group_anagrams(words)
     

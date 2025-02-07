@@ -1,24 +1,23 @@
 def k_most_frequent(lst, k):
-    values = {}
+    leaderboard = {}
+    if len(lst) == 0:
+        return []
+    counts = {}
+    for e in lst:
+        counts[e] = counts.get(e,0) +1
 
-    for i in lst:
-        if i not in values:
-            values[i] = 1
-        else:
-            values[i] += 1
+    
     
     #lambda part is essentialy def key(x): return values[x]    
-    leaderboard = sorted(values.keys(), key=lambda x: values[x], reverse=True)
-    leaderboard[k - 1]
-    
-    while k > 1:
-        k -= 1
-        leaderboard[k]
-    
-    print(leaderboard)
+    leaderboard = sorted(counts.keys(), key=lambda x: counts[x], reverse=True)
+    i = min(len(leaderboard)-1,k)
+    ith_count = counts[leaderboard[i-1]]
 
-lst = [1,2,1,3,1,2]
-k_most_frequent(lst, 2)
+    while i < len(leaderboard) and counts[leaderboard[i]] == ith_count:
+        i += 1
+    return leaderboard[:i]
+
+print(k_most_frequent([1,1,1,2,2,3], 2))
 
 
 
